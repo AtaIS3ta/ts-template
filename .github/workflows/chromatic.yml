@@ -21,11 +21,14 @@ jobs:
         with:
           auto-install: true
 
+      - name: Initialize Moon workspace
+        run: moon init --yes
+
       - name: Install dependencies
         run: moon ci
 
       - name: Build Storybook
-        run: moon run :build-storybook
+        run: bun run build-storybook
 
       - name: Publish to Chromatic
         uses: chromaui/action@v1
