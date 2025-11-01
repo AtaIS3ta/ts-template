@@ -28,7 +28,7 @@ jobs:
         run: moon ci
 
       - name: Build Storybook
-        run: storybook build
+        run: bun run build-storybook
 
       - name: Publish to Chromatic
         uses: chromaui/action@v1
