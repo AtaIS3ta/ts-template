@@ -9,26 +9,26 @@ jobs:
   chromatic:
     name: Run Chromatic
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      - name: Setup Bun
-        uses: oven-sh/setup-bun@v1
+      - name: Setup Moon toolchain
+        uses: moonrepo/setup-toolchain@v0
         with:
-          bun-version: latest
+          auto-install: true
 
       - name: Install dependencies
-        run: bun install
+        run: moon ci
 
       - name: Build Storybook
-        run: bun run build-storybook
+        run: moon run :build-storybook
 
       - name: Publish to Chromatic
         uses: chromaui/action@v1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
-          buildScriptName: build-storybook
