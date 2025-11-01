@@ -16,16 +16,13 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Setup Moon toolchain
-        uses: moonrepo/setup-toolchain@v0
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v1
         with:
-          auto-install: true
-
-      - name: Initialize Moon workspace
-        run: moon init --yes
+          bun-version: latest
 
       - name: Install dependencies
-        run: moon ci
+        run: bun install --frozen-lockfile
 
       - name: Build Storybook
         run: bun run build-storybook
